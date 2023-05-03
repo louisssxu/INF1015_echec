@@ -1,24 +1,28 @@
 #pragma once
 #include <QWidget>
+#include <qpushbutton.h>
 
-#include "Piece.h"
 using namespace std;
 
-class Square : public QWidget {
+class Square : public QPushButton {
 public:
-	Square(int row, int col, int width, int height, QWidget* parent = 0);
+	Square(int row, int col, int width, int height);
 	~Square() = default;
 	void updateSquare();
 	void selected();
 	void targeted(); // missing
+	void setPieceIcon(string icon);
+	bool isOccuped();
+	pair<int, int> getPosition() const;
+	void setHilighted();
 
 
 private:
 	bool isHighlighted_ = false;
 	bool isTargeted_ = false;
+	bool isOccuped_ = false;
 	int row_;
 	int col_;
 	int width_;
 	int height_;
-	//Piece* piece_;
 };

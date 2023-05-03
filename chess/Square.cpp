@@ -2,7 +2,7 @@
 #include <QWidget>
 #include <QLabel>
 
-Square::Square(int row, int col, int width, int height, QWidget* parent) : QWidget(parent) {
+Square::Square(int row, int col, int width, int height) {
 	row_ = row;
 	col_ = col;
 	width_ = width;
@@ -12,7 +12,7 @@ Square::Square(int row, int col, int width, int height, QWidget* parent) : QWidg
 
 	QString styleSheet = "";
 
-	Rook* label = new Rook(width_, height_, this);
+	//Rook* label = new Rook(width_, height_, this);
 
 	
 	if ((row_ + col_) % 2 == 0) {
@@ -58,4 +58,23 @@ void Square::selected() {
 	else {
 		isHighlighted_ = true;
 	}
+}
+
+void Square::setPieceIcon(string icon) {
+	isOccuped_ = true;
+	QPixmap pixmap(QString::fromStdString(icon));
+	setIcon(pixmap);
+	setIconSize(QSize(width_, height_));
+}
+
+bool Square::isOccuped() {
+	return isOccuped_;
+}
+
+pair<int, int> Square::getPosition() const {
+	return { row_, col_ };
+}
+
+void Square::setHilighted() {
+	isHighlighted_ = !isHighlighted_;
 }
