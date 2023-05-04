@@ -12,6 +12,7 @@ public:
     pair<int, int> getPosition();
     string getPng();
     virtual bool isValidMovement(int x, int y) const = 0;
+    void setPosition(int row, int col);
 protected:
     //QString letter_;
     int value_;
@@ -23,6 +24,6 @@ protected:
 
 class Rook : public Piece {
 public:
-    Rook(int width, int height, int x, int y);
+    Rook(int width, int height, int x, int y, char color);
     bool isValidMovement(int x, int y) const;
 };

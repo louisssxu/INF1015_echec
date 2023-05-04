@@ -14,7 +14,7 @@ Square::Square(int row, int col, int width, int height) {
 
 	//Rook* label = new Rook(width_, height_, this);
 
-	
+
 	if ((row_ + col_) % 2 == 0) {
 		styleSheet += "background-color: #eeeed2; "; //cream color
 	}
@@ -35,7 +35,7 @@ void Square::updateSquare() {
 		else {
 			styleSheet += "background-color: #eeeed2; "; //cream color
 		}
-		
+
 	}
 	else {
 		if (this->isHighlighted_) {
@@ -44,21 +44,25 @@ void Square::updateSquare() {
 		else {
 			styleSheet += "background-color: #769656; "; //green color
 		}
-		
+
 	}
 
+	if (this->isTargeted_) {
+		styleSheet += "border: 2px solid red; ";// outlined red
+	}
+
+	//this->isOccuped_ = false;
 	this->setStyleSheet(styleSheet);
 };
 
 
-void Square::selected() {
-	if (isHighlighted_) {
-		isHighlighted_ = false;
-	}
-	else {
-		isHighlighted_ = true;
-	}
+void Square::removePiece() {
+	isOccuped_ = false;
+	setIcon(QIcon());
 }
+
+
+
 
 void Square::setPieceIcon(string icon) {
 	isOccuped_ = true;
@@ -67,14 +71,38 @@ void Square::setPieceIcon(string icon) {
 	setIconSize(QSize(width_, height_));
 }
 
+
+
 bool Square::isOccuped() {
 	return isOccuped_;
 }
+
+bool Square::isTargeted() {
+	return isTargeted_;
+}
+
+bool Square::isHighlighted() {
+	return isHighlighted_;
+}
+
+bool Square::isNull() {
+	return !(isOccuped_ || isTargeted_ || isHighlighted_);
+}
+
 
 pair<int, int> Square::getPosition() const {
 	return { row_, col_ };
 }
 
-void Square::setHilighted() {
+void Square::toggleTargeted() {
+	isTargeted_ = !isTargeted_;
+}
+
+void Square::toggleHilighted() {
 	isHighlighted_ = !isHighlighted_;
+}
+
+void Square::resetSquare() {
+	isHighlighted_ = false;
+	isTargeted_ = false;
 }

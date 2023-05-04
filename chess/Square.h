@@ -9,12 +9,16 @@ public:
 	Square(int row, int col, int width, int height);
 	~Square() = default;
 	void updateSquare();
-	void selected();
-	void targeted(); // missing
 	void setPieceIcon(string icon);
+	void removePiece();
 	bool isOccuped();
+	bool isHighlighted();
+	bool isTargeted();
+	bool isNull();
 	pair<int, int> getPosition() const;
-	void setHilighted();
+	void toggleTargeted();
+	void toggleHilighted();
+	void resetSquare();
 
 
 private:
